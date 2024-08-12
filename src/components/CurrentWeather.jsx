@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Thermometer, Droplets, Wind } from 'lucide-react';
 
-const CurrentWeather = ({ data }) => {
+const CurrentWeather = ({ data, city }) => {
   const currentTemp = data.hourly.temperature_2m[0];
   const currentPrecipProb = data.hourly.precipitation_probability[0];
   const currentWindSpeed = data.hourly.windspeed_10m[0];
@@ -10,7 +10,7 @@ const CurrentWeather = ({ data }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Current Weather</CardTitle>
+        <CardTitle>Current Weather in {city}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex items-center space-x-2">
