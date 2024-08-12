@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Search } from 'lucide-react';
 import WeatherChart from './WeatherChart';
 import CurrentWeather from './CurrentWeather';
 import WeeklyForecast from './WeeklyForecast';
@@ -25,23 +26,21 @@ const WeatherDashboard = () => {
     queryFn: () => fetchWeatherData(searchCity),
   });
 
-  const handleCityChange = (e) => {
-    setCity(e.target.value);
-  };
-
   const handleSearch = (e) => {
-    e.preventDefault(); // Prevent form submission
-    setSearchCity(city); // Update the search city, which will trigger a new query
+    e.preventDefault();
+    setSearchCity(city);
   };
 
-  if (isLoading) return <div className="text-center">Loading...</div>;
-  if (error) return <div className="text-center text-red-500">Error: {error.message}</div>;
+  if (isLoading) return <div className="flex items-center justify-center h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+  </div>;
+  if (error) return <div className="text-center text-red-500 p-4 bg-red-100 rounded-lg mt-4">Error: {error.message}</div>;
 
   return (
-    <div className="space-y-8">
-      <Card>
+    <div className="space-y-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Card className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
         <CardHeader>
-          <CardTitle>Search City</CardTitle>
+          <CardTitle className="text-3xl font-bold">Weather Dashboard</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSearch} className="flex space-x-2">
@@ -49,9 +48,12 @@ const WeatherDashboard = () => {
               type="text"
               placeholder="Enter city name"
               value={city}
-              onChange={handleCityChange}
+              onChange={(e) => setCity(e.target.value)}
+              className="bg-white text-black"
             />
-            <Button type="submit">Search</Button>
+            <Button type="submit" variant="secondary">
+              <Search className="mr-2 h-4 w-4" /> Search
+            </Button>
           </form>
         </CardContent>
       </Card>

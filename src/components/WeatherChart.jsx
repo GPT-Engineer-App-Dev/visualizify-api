@@ -10,9 +10,9 @@ const WeatherChart = ({ data }) => {
   }));
 
   return (
-    <Card>
+    <Card className="bg-white">
       <CardHeader>
-        <CardTitle>24-Hour Forecast</CardTitle>
+        <CardTitle className="text-2xl text-gray-800">24-Hour Forecast</CardTitle>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
